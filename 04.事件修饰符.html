@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .inner{
+            height: 150px;
+            background-color:darkcyan ;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <div class="inner" @click="div1Handler">
+            使用.stop修饰符阻止事件冒泡，也就是低层事件不会触发外侧事件
+            <input type="button" value="戳他" @click.stop="btnHandler">
+
+            
+        </div> -->
+        <!-- 使用.prevent阻止默认行为 -->
+        <a href="https:www.baidu.com" @click.prevent="linkclick">百度</a>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+
+            },
+            methods:{
+                div1Handler(){
+                    console.log('inner div的点击事件')
+                },
+                btnHandler(){
+                    console.log('btn 的点击事件')
+                },
+                linkclick(){
+                    console.log('链接 的点击事件')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

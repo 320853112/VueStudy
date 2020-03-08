@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用 v-cloak 能够解决 插值表达式闪烁问题，也就是加载慢的时候，会直接出现表达式，如这里的msg -->
+        <p v-cloak>{{msg}}</p>
+        <h4 v-text="msg"></h4>
+        <!-- 默认v-text没有闪烁问题 -->
+        <!-- v-text会覆盖原有的内容，而插值表达式只会替换换位符 -->
+        <div>{{msg2}}</div>
+        <div v-text="msg2"></div>
+        <div v-html="msg2"></div>
+        <!-- v-bind是Vue中提供的用于绑定属性的指令,其中的内容可以理解为变量表达式，可拼接字符串 -->
+
+        <!-- Vue中提供了 v-on事件绑定机制 -->
+        <!-- <input type="button" value="按钮" v-bind:title="mytitle+'123'" v-on:click="alert('hello')"> -->
+        <input type="button" value="按钮" v-on:click="show">
+        <input type="button" value="按钮2" @click="show">
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '123',
+                msg2: '<h1>我是一个H1</h1>',
+                mytitle: '这是一个自定义的title'
+            },
+            methods:{ //这个method中定义了当前Vue实例中所有可用的方法
+                show: function(){
+                    alert('hello')
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+    1.如何定义一个基本的Vue代码结构
+    2.插值表达式 和 v-text
+    3.v-clock
+    4.v-html
+    5.v-bind Vue提供的属性绑定机制 缩写是 ：
+    6.v-on Vue提供的事件绑定机制 缩写是@
+
+
+ -->
+
+

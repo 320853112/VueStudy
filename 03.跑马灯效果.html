@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <!-- 创建要控制的区域 -->
+    <div id="app">
+        <input type="button" value="浪起来" @click="run">
+        <input type="button" value="低调" @click="stop">
+        <h4>{{msg}}</h4>
+    </div>
+        
+    <script>
+        //在VM实例中，如果想要获取data上的数据，或者想要调用methods中的方法，必须通过this.数据名或this.方法名来调用
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                msg: '猥琐发育，别浪~~!  ',
+                intervalId:null  //在data上定义 定时器Id
+            },
+            methods:{
+                run(){
+                    if(this.intervalId!=null) return 
+                    var _this = this
+                    this.intervalId = setInterval(function(){
+                        //拿到msg字符串，然后调用字符串的substring方法来进行截取操作，把第一个字符截取，放到最后一个，为了实现全自动，要把该功能放在定时器中
+                    var start = _this.msg.substring(0,1)
+                    var end = _this.msg.substring(1)
+                    _this.msg=end + start 
+                    //wm实例会监听自身的数据改变，自动同步
+                    },400)
+                },
+                stop(){//停止定时器
+                    clearInterval(this.intervalId)
+                    this.intervalId = null
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
